@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cyber Security Monitor – Educational Demo</title>
+
+<style>
+/* ===== GLOBAL ===== */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #0f172a;
+    color: #e5e7eb;
+    margin: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+/* ===== NAVBARS ===== */
+.navbar {
+    background: #020617;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #1e293b;
+}
+
+.navbar h3 {
+    margin: 0;
+    color: #38bdf8;
+}
+
+.navbar button {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    margin-left: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.navbar button:hover {
+    background: #1d4ed8;
+}
+
+/* ===== LOGIN ===== */
+#loginBox {
+    width: 320px;
+    margin: 120px auto;
+    background: #020617;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #020617;
+    text-align: center;
+}
+
+#loginBox input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+}
+
+#loginBox button {
+    width: 95%;
+    padding: 10px;
+    background: #22c55e;
+    border: none;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.note {
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+/* ===== DASHBOARD ===== */
+#dashboard {
+    padding: 25px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: #020617;
+}
+
+th, td {
+    border: 1px solid #1e293b;
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background: #020617;
+    color: #38bdf8;
+}
+
+.danger {
+    color: #ef4444;
+}
+
+.warning {
+    color: #facc15;
+}
+
+/* ===== BALANCE PAGE ===== */
+.balancePage {
+    padding: 25px;
+}
+
+.balance {
+    font-size: 32px;
+    color: #22c55e;
+    margin: 10px 0 20px;
+}
+
+.disclaimer {
+    margin-top: 15px;
+    font-size: 13px;
+    color: #94a3b8;
+}
+/* ===== BONUS PAYMENT TABLE ===== */
+.bonus-section {
+    margin-top: 40px;
+}
+
+.bonus-section h3 {
+    color: #facc15;   /* yellow heading */
+    margin-bottom: 10px;
+}
+
+.bonus-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #020617;
+}
+
+.bonus-table th {
+    background: #1e293b;
+    color: #38bdf8;
+    padding: 12px;
+    border: 1px solid #334155;
+}
+
+.bonus-table td {
+    padding: 10px;
+    border: 1px solid #334155;
+    color: #e5e7eb;
+}
+
+.bonus-table tr:nth-child(even) {
+    background: #020617;
+}
+
+.bonus-table tr:hover {
+    background: #1e293b;
+    transition: 0.3s;
+}
+
+/* Highlight bonus amount */
+.bonus-amount {
+    color: #22c55e;
+    font-weight: bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN NAV -->
+<nav id="loginNav" class="navbar">
+    <h3>🔐 Secure Login</h3>
+</nav>
+
+<!-- DASHBOARD NAV -->
+<nav id="tableNav" class="navbar hidden">
+    <h3>📊 Cyber Attack Monitor</h3>
+    <div>
+        <button onclick="showBalance()">View Balance</button>
+        <button onclick="logout()">Logout</button>
+    </div>
+</nav>
+
+<!-- BALANCE NAV -->
+<nav id="balanceNav" class="navbar hidden">
+    <h3>💰 Account Balance</h3>
+    <div>
+        <button onclick="goBack()">Dashboard</button>
+        <button onclick="logout()">Logout</button>
+    </div>
+</nav>
+
+<!-- LOGIN BOX -->
+<div id="loginBox">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <p class="note">Demo credentials: <b>admin / admin</b></p>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="hidden">
+    <h2>⚠ Cyber Attack Monitoring (Simulation)</h2>
+
+    <table>
+        <tr>
+            <th>User</th>
+            <th>Mobile</th>
+            <th>Attack Type</th>
+            <th>Status</th>
+        </tr>
+        <tr>
+            <td>Soniea Sengupta</td>
+            <td>8420770779</td>
+            <td>Facebook Phishing</td>
+            <td class="danger">Data Leaked</td>
+        </tr>
+        <tr>
+            <td>Soniea Sengupta</td>
+            <td>8420770779</td>
+            <td>Malware Link</td>
+            <td class="warning">Detected</td>
+        </tr>
+    </table>
+</div>
+
+<!-- BALANCE PAGE -->
+<div id="balancePage" class="balancePage hidden">
+    <h2>💰 Facebook AdSense Balance (Simulation)</h2>
+
+    <p class="balance">$ <span id="balanceAmount">24</span></p>
+
+    <h3>Unauthorized Payment Logs</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>User Name</th>
+                <th>Attacker Name</th>
+                <th>AdSense Payment ($)</th>
+                <th>Payment Date</th>
+            </tr>
+        </thead>
+        <tbody id="paymentTable"></tbody>
+    </table>
+
+    <!-- BONUS TABLE -->
+    <h3 class="section-title">Bonus Payment Logs</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Attacker Name</th>
+                <th>Amount Paid ($)</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody id="bonusTable"></tbody>
+    </table>
+
+
+    <p class="disclaimer">
+        
+    </p>
+</div>
+
+<script>
+/* ===== LOGIN LOGIC ===== */
+function login() {
+    const u = document.getElementById("username").value;
+    const p = document.getElementById("password").value;
+
+    if (u === "admin" && p === "admin") {
+        document.getElementById("loginBox").classList.add("hidden");
+        document.getElementById("loginNav").classList.add("hidden");
+        document.getElementById("tableNav").classList.remove("hidden");
+        document.getElementById("dashboard").classList.remove("hidden");
+    } else {
+        alert("Invalid credentials");
+    }
+}
+
+function logout() {
+    location.reload();
+}
+
+/* ===== NAVIGATION ===== */
+function showBalance() {
+    document.getElementById("dashboard").classList.add("hidden");
+    document.getElementById("tableNav").classList.add("hidden");
+    document.getElementById("balanceNav").classList.remove("hidden");
+    document.getElementById("balancePage").classList.remove("hidden");
+}
+
+function goBack() {
+    document.getElementById("balancePage").classList.add("hidden");
+    document.getElementById("balanceNav").classList.add("hidden");
+    document.getElementById("tableNav").classList.remove("hidden");
+    document.getElementById("dashboard").classList.remove("hidden");
+}
+
+/* ===== PAYMENT TABLE DATA ===== */
+const payments = [
+    { user: "Soniea Sengupta", hacker: "Santosh Das", amount: 80, date: "2025-12-02" },
+    { user: "Soniea Sengupta", hacker: "Santosh Das", amount: 95, date: "2025-11-26" },
+    { user: "Soniea Sengupta", hacker: "Santosh Das", amount: 90, date: "2025-10-14" },
+    { user: "Soniea Sengupta", hacker: "Unknown Android User Narzo 50i", amount: 100, date: "2025-09-26" },
+    { user: "Soniea Sengupta", hacker: "Unknown Android User Narzo 50i", amount: 97, date: "2025-08-12" }
+];
+
+const table = document.getElementById("paymentTable");
+
+payments.forEach(p => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+        <td>${p.user}</td>
+        <td>${p.hacker}</td>
+        <td>$${p.amount}</td>
+        <td>${p.date}</td>
+    `;
+    table.appendChild(row);
+});
+
+/* ===== BONUS PAYMENT TABLE DATA ===== */
+const bonusPayments = [
+    { user: "Soniea Sengupta", hacker: "Santosh Das", amount: 100, date: "2025-12-07" },
+    { user: "Soniea Sengupta", hacker: "Unknown Android User Narzo 50i", amount: 92, date: "2025-11-26" },
+    { user: "Soniea Sengupta", hacker: "Santosh Das", amount: 125, date: "2025-10-14" }
+];
+
+const bonusTable = document.getElementById("bonusTable");
+
+bonusPayments.forEach(p => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+        <td>${p.user}</td>
+        <td>${p.hacker}</td>
+        <td class="bonus-amount">$${p.amount}</td>
+        <td>${p.date}</td>
+    `;
+    bonusTable.appendChild(row);
+});
+
+</script>
+
+</body>
+</html>
